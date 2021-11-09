@@ -89,5 +89,4 @@ app.post('/messages/new', (req, res)=>{
     })
 });
 
-// listen
 app.listen(port, ()=>console.log(`Listening on localhost:${port}`))
