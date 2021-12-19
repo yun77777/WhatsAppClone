@@ -9,6 +9,7 @@ import "./Chat.css"
 
 function Chat({messages}) {
     const [input, setInput] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const sendMessage = async(e) =>{
         e.preventDefault();
@@ -23,6 +24,42 @@ function Chat({messages}) {
         setInput('');
     }
 
+    const test = async(e) =>{
+        e.preventDefault();
+        alert('a')
+    }
+
+    const onChange = (e) => {
+        setImage(e.target.files[0]);
+    }
+
+    const onClick = async() => {
+        const formData = new FormData();
+        formData.append('file', img);
+        const res = await axios.post('/api/upload', formData);
+        console.log(res);
+    }
+
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+        console.log("event.target.files[0]:",event.target.files[0]);
+    }
+
+    const handleFileUpload = () => {
+        const formData = new FormData();
+
+        formData.append("userfile", selectedFile, selectedFile.name);
+
+        axios.post('api/uploadfile', formData)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+
+
     return (
         <div className="chat">
             <div className="chat__header">
@@ -35,9 +72,14 @@ function Chat({messages}) {
                     <IconButton>
                         <SearchOutlined/>
                     </IconButton>
-                    <IconButton>
-                        <AttachFile/>
-                    </IconButton>
+                    <div>
+                        {/* <input type="file" onChange={handleFileChange}/>
+                        <IconButton onClick={handleFileUpload}> */}
+                        <input type="img" onChange={onChange}/>
+                        <IconButton onClick={onClick}>
+                            <AttachFile/>
+                        </IconButton>
+                    </div>
                     <IconButton>
                         <MoreVert/>
                     </IconButton>

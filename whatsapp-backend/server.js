@@ -31,7 +31,9 @@ app.use(cors());
 // });
 
 // DB config
-const password=process.env.REACT_APP_DB_PASSWORD;
+// const password=process.env.REACT_APP_DB_PASSWORD;
+const password=process.env.DB_PW;
+console.log("pw:",password)
 const connection_url=`mongodb+srv://admin:`+password+`@cluster0.9jyq0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 mongoose.connect(connection_url, {
