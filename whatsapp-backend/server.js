@@ -20,7 +20,6 @@ const pusher = new Pusher({
   useTLS: true
 });
 
-// middleware
 app.use(express.json());
 app.use(cors());
 
