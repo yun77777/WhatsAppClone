@@ -8,7 +8,6 @@ import cors from 'cors';
 
 dotenv.config();
 
-// app config
 const app = express();
 const port = process.env.PORT || 9000;
 
@@ -23,20 +22,11 @@ const pusher = new Pusher({
 app.use(express.json());
 app.use(cors());
 
-// app.use((req, res, next)=>{
-//     res.setHeader("Access-Control-Allow-Origin","*");
-//     res.setHeader("Access-Control-Allow-Headers","*");
-//     next();
-// });
-
-// DB config
-// const password=process.env.REACT_APP_DB_PASSWORD;
 const password=process.env.DB_PW;
 console.log("pw:",password)
-const connection_url=`mongodb+srv://admin:`+password+`@cluster0.9jyq0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const connection_url = process.env.ATLAS_URI;
 
 mongoose.connect(connection_url, {
-    // useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
